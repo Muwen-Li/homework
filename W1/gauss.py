@@ -1,4 +1,3 @@
-# 导入必要的库
 import numpy as np
 import matplotlib.pyplot as plt
 
