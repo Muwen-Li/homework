@@ -9,6 +9,7 @@ with open(r'C:\Users\Lenovo\Desktop\python\homework\W2\cn_stopwords.txt', 'r', e
     stopwords = set([line.strip() for line in file])
 stopwords = list(stopwords)
 
+documents=document_shopID_time(df,518986, 'year')
 count_matrix, count_vectorizer,feature_names = doc_word_freq(518986, 'year', stopwords)
 doc_topic_distribution = lda_topic_analysis(518986, 'year', stopwords, n_topics=5)
 
@@ -20,3 +21,9 @@ with open('count_matrix.pkl', 'wb') as f:
 
 with open('feature_names.pkl', 'wb') as f:
     pickle.dump(feature_names, f)  # 保存特征名称
+
+with open("count_vectorizer.pkl","wb") as f:
+    pickle.dump(count_vectorizer,f)
+
+with open('documents.pkl','wb') as f:
+    pickle.dump(documents,f)
