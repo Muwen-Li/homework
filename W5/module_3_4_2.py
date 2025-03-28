@@ -1,9 +1,13 @@
-emotions=['anger','disgust','fear','sadness','joy']
-emo_dict={}
-for emotion in emotions:
-    path=f'{"C:\\Users\\Lenovo\\Desktop\\emotion_lexicon (1)\\emotion_lexicon"}/{emotion}.txt'
-    with open(path,'r',encoding='utf-8') as f:
-        emo_dict[emotion]=set(f.read().splitlines())
+from module_5_4_analyzer import TextAnalyzer  
+
+analyzer = TextAnalyzer(textfile_path=r"c:\Users\Lenovo\Desktop\weibo.txt",stopwords_path=r"C:\Users\Lenovo\Desktop\python\homework\W2\cn_stopwords.txt")
+analyzer._pre_process()
+analyzer._get_word2vec_model()
+
+expanded_lexicon = analyzer.expand_emotion_lexicon(r"C:\Users\Lenovo\Desktop\emotion_lexicon (1)\emotion_lexicon")
+emo_dict = {emotion: set() for emotion in ['anger', 'disgust', 'fear', 'sadness', 'joy']}
+for word, label in expanded_lexicon.items():
+    emo_dict[label].add(word)
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -59,5 +63,6 @@ def emotion_time_analize(path,emotion,shop_ID,time_type):
     
     print(freq_table)
     return freq_table        
+
 
 emotion_time_analize('C:\\Users\\Lenovo\\Desktop\\week3.csv','joy',521698,'weekday')
